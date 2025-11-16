@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Curiosity — TechGensis</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <style>
+      :root {
+        --topbar-height: 48px;
+        --container-max: 1200px;
+        --gutter: 40px;
+
+        --bg-deep-1: #040511;
+        --bg-deep-2: #071226;
+        --muted: #e9d9cf;
+        --cream: #f6e9c7;
+
+        --red-600: #d93f36;
+        --red-400: #ff7853;
+        --panel-radius: 18px;
+        --card-radius: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: Inter, system-ui, Arial;
+        color: var(--muted);
+        -webkit-font-smoothing: antialiased;
+        background: linear-gradient(
+          180deg,
+          var(--bg-deep-1) 0%,
+          var(--bg-deep-2) 100%
+        );
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font-family: inherit;
+      }
+
+      .container {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* topbar */
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1200;
+        height: var(--topbar-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.84),
+          rgba(0, 0, 0, 0.5)
+        );
+        backdrop-filter: blur(6px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      }
+      .site-offset {
+        height: var(--topbar-height);
+        width: 100%;
+      }
+      .logo {
+        font-family: Cinzel, serif;
+        color: var(--red-600);
+        font-weight: 800;
+        letter-spacing: 1px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .navlinks {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .navlinks a {
+        font-weight: 600;
+        padding: 6px 10px;
+        border-radius: 6px;
+        opacity: 0.97;
+        transition: all 0.12s ease;
+      }
+      .navlinks a:hover {
+        background: rgba(255, 255, 255, 0.03);
+        transform: translateY(-2px);
+      }
+
+      /* hero */
+      .hero {
+        position: relative;
+        overflow: visible;
+        padding: 72px 0 92px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          rgba(5, 6, 10, 0.36),
+          rgba(6, 10, 16, 0.3)
+        );
+      }
+
+      /* hero background layer — ABSOLUTE so it stays only in hero */
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+        background-image: url("events/background.jpg"); 
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* brighten and slightly increase contrast/saturation */
+        filter: brightness(1.2) contrast(1.06) saturate(1.06);
+        opacity: 0.96;
+        pointer-events: none;
+      }
+      /* subtle overlay to keep text readable */
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(0, 0, 0, 0.06) 0%,
+          rgba(0, 0, 0, 0.14) 36%,
+          rgba(0, 0, 0, 0.46) 100%
+        );
+        pointer-events: none;
+      }
+
+      .hero .container {
+        position: relative;
+        z-index: 2;
+      }
+      .hero h1 {
+        font-family: Cinzel, serif;
+        color: var(--red-400);
+        font-size: clamp(44px, 8.5vw, 96px);
+        margin: 0;
+        letter-spacing: 6px;
+        text-shadow: 0 20px 40px rgba(217, 63, 54, 0.14);
+      }
+      .hero .subtitle {
+        font-family: Cinzel, serif;
+        color: var(--cream);
+        margin-top: 10px;
+        font-size: clamp(16px, 2.6vw, 26px);
+      }
+      .hero .cta {
+        margin-top: 22px;
+        display: inline-flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .btn {
+        border: none;
+        padding: 12px 22px;
+        border-radius: 8px;
+        font-weight: 800;
+        background: linear-gradient(90deg, var(--red-600), var(--red-400));
+        color: #fff;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+        transition: transform 0.18s;
+      }
+      .btn:hover {
+        transform: translateY(-3px);
+      }
+      .btn.ghost {
+        background: linear-gradient(90deg, #ff8f5d, #ff4e4e);
+      }
+      .hero .arrow {
+        margin-top: 26px;
+        color: rgba(255, 120, 110, 0.9);
+        font-size: 22px;
+        opacity: 0.95;
+      }
+
+      /* section titles */
+      .section-title {
+        font-family: Cinzel, serif;
+        text-align: center;
+        font-size: 32px;
+        margin: 6px 0 8px;
+        color: var(--muted);
+      }
+      .underline {
+        width: 72px;
+        height: 6px;
+        margin: 12px auto 22px;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #57a8ff, #f46a6a);
+      }
+
+      section.panel {
+        width: 100%;
+        padding: 40px 0;
+      }
+      .panel .panel-box {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 22px;
+        border-radius: var(--panel-radius);
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.32);
+      }
+      .panel.blue .panel-box {
+        background: linear-gradient(
+          180deg,
+          rgba(20, 52, 108, 0.98),
+          rgba(41, 88, 179, 0.96)
+        );
+      }
+      .panel.red .panel-box {
+        background: linear-gradient(
+          180deg,
+          rgba(125, 20, 20, 0.98),
+          rgba(189, 45, 37, 0.96)
+        );
+      }
+
+      /* cards grid */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 12px 0;
+      }
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(0, 0, 0, 0.03)
+        );
+        border-radius: var(--card-radius);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 320px;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.36);
+        transition: transform 0.18s;
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.55);
+      }
+      .card .media {
+        height: 156px;
+        background: #081523;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .card .media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .card .body {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 1;
+      }
+      .card h3 {
+        font-weight: 800;
+        margin: 0;
+        color: #fff;
+        font-size: 16px;
+      }
+      .card p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .card .reg {
+        margin-top: auto;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        background: linear-gradient(90deg, var(--red-600), #ff8b46);
+        font-weight: 800;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.32);
+      }
+      .card .reg:hover {
+        transform: translateY(-3px);
+      }
+
+      /* upgrade CTA */
+      .upgrade .panel-box {
+        max-width: 860px; 
+        margin: 0 auto; 
+        padding: 36px 22px;
+        text-align: center; 
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center;
+        gap: 12px;
+      }
+      .upgrade .panel-box .btn {
+        margin-top: 6px;
+        padding: 12px 26px;
+        min-width: 160px;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.36);
+      }
+
+      .upgrade h2 {
+        font-family: Cinzel, serif;
+        color: var(--red-400);
+        font-size: 40px;
+        margin: 0 0 8px;
+      }
+      .upgrade p {
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+
+      /* gallery */
+      .gallery {
+        padding: 36px 0;
+      }
+      .carousel {
+        position: relative;
+        padding: 0 0 12px;
+      }
+      .slide {
+        display: none;
+      }
+      .slide.active {
+        display: block;
+      }
+      .slide img {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+      }
+      .thumbs {
+        display: flex;
+        gap: 12px;
+        overflow: auto;
+        margin-top: 12px;
+        padding: 6px;
+      }
+      .thumbs button {
+        border-radius: 8px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        background: transparent;
+        cursor: pointer;
+        min-width: 110px;
+        flex: 0 0 auto;
+      }
+      .thumbs img {
+        width: 110px;
+        height: 66px;
+        object-fit: cover;
+        display: block;
+        border-radius: 6px;
+      }
+      .thumbs button.active {
+        border-color: var(--red-600);
+        box-shadow: 0 8px 22px rgba(211, 58, 48, 0.12);
+      }
+
+      /* footer */
+      footer {
+        padding: 56px 0 36px;
+        background: linear-gradient(
+          180deg,
+          #160b0c 0%,
+          #0b1116 60%,
+          #04060a 100%
+        );
+        color: var(--muted);
+      }
+      .footer-grid {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        padding: 0 18px;
+        text-align: justify;
+      }
+      .footer h4 {
+        text-align: center;
+        margin: 0 0 12px;
+        font-family: Cinzel, serif;
+        color: var(--red-600);
+        font-size: 18px;
+      }
+      .footer p,
+      .footer a {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+        margin: 6px 0;
+      }
+      .divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.03);
+        max-width: var(--container-max);
+        margin: 24px auto;
+      }
+      .footer-bottom {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 18px;
+        color: rgba(246, 233, 199, 0.82);
+        font-size: 13px;
+      }
+      .footer-bottom a {
+        color: inherit;
+      }
+
+      /* responsive */
+      @media (max-width: 1100px) {
+        :root {
+          --container-max: 980px;
+        }
+        .cards {
+          gap: 18px;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero h1 {
+          font-size: clamp(36px, 12vw, 72px);
+        }
+      }
+      @media (max-width: 820px) {
+        :root {
+          --container-max: 740px;
+        }
+        .hero {
+          padding: 56px 0 72px;
+        }
+        .panel .panel-box {
+          padding: 16px;
+        }
+        .card .media {
+          height: 140px;
+        }
+        .slide img {
+          height: 220px;
+        }
+      }
+      @media (max-width: 480px) {
+        :root {
+          --container-max: 420px;
+        }
+        .hero h1 {
+          font-size: 34px;
+        }
+        .topbar {
+          height: 44px;
+        }
+        .site-offset {
+          height: 44px;
+        }
+      }
+
+      /* small focus */
+      a:focus,
+      button:focus {
+        outline: 2px solid rgba(255, 255, 255, 0.06);
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- topbar -->
+    <header class="topbar" role="banner">
+      <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        Curiosity
+      </div>
+      <nav class="navlinks" role="navigation">
+        <a
+          href=""
+          target="_blank"
+          rel="noopener"
+          >Brochure</a
+        >
+        <a
+          href="https://www.instagram.com/curiosity_vivekcollege/"
+          target="_blank"
+          rel="noopener"
+          >Instagram</a
+        >
+      </nav>
+    </header>
+    <div class="site-offset" aria-hidden="true"></div>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="container">
+        <h1>CURIOSITY</h1>
+        <div class="subtitle">TechGensis</div>
+        <div class="cta">
+          <button class="btn" onclick="openDate('')">
+            Date Reveal
+          </button>
+          <button class="btn ghost" onclick="openBrochure('')">Brochure</button>
+        </div>
+        <!-- <div class="arrow">↓</div> -->
+      </div>
+    </section>
+
+    <!-- TECH PANEL -->
+    <section class="panel blue" aria-labelledby="technical">
+      <div class="panel-box">
+        <div class="container">
+          <div class="section-title" id="technical">Technical Events</div>
+          <div
+            class="underline"
+            style="background: linear-gradient(90deg, #57a8ff, #2f8bd6)"
+          ></div>
+
+          <div class="cards">
+            <article class="card">
+              <div class="media">
+                <img src="events/site.png" alt="Site Replica" />
+              </div>
+              <div class="body">
+                <h3>Site Replica</h3>
+                <p>
+                  Create stunning and responsive websites using modern tools and
+                  designing principles.
+                </p>
+                <button class="reg" onclick="openSite()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media">
+                <img src="events/debug.png" alt="Bug the Decode" />
+              </div>
+              <div class="body">
+                <h3>Debug the Code</h3>
+                <p>
+                  Test your debugging skills and solve complex coding
+                  challenges.
+                </p>
+                <button class="reg" onclick="openDebug()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media">
+                <img src="events/data.png" alt="Data Board" />
+              </div>
+              <div class="body">
+                <h3>Data Board</h3>
+                <p>
+                  Analyze, visualize and present data insights using analytics
+                  tools and techniques.
+                </p>
+                <button class="reg" onclick="openData()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media">
+                <img src="events/thumb.png" alt="Poster Making" />
+              </div>
+              <div class="body">
+                <h3>Thumbnail / Poster Making</h3>
+                <p>
+                  Design eye-catching thumbnails and posters that capture
+                  attention.
+                </p>
+                <button class="reg" onclick="openThumb()">Register</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NON-TECH PANEL -->
+    <section class="panel red" aria-labelledby="nontech">
+      <div class="panel-box">
+        <div class="container">
+          <div class="section-title" id="nontech">Non-Technical Events</div>
+          <div
+            class="underline"
+            style="background: linear-gradient(90deg, #ff6b6b, #ff9852)"
+          ></div>
+
+          <div class="cards">
+            <article class="card">
+              <div class="media">
+                <img src="events/clash.jpg" alt="Clash Royale" />
+              </div>
+              <div class="body">
+                <h3>Clash Royale</h3>
+                <p>Competitive Card PvP Game for individuals.</p>
+                <button class="reg" onclick="openClash()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media"><img src="events/codm.webp" alt="CODM" /></div>
+              <div class="body">
+                <h3>Call of Duty : Mobile</h3>
+                <p>Call of Duty Mobile tournaments squad formats.</p>
+                <button class="reg" onclick="openCodm()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media"><img src="events/bgmi.jpg" alt="BGMI" /></div>
+              <div class="body">
+                <h3>BGMI Squad</h3>
+                <p>Competitive battlegrounds matches for teams.</p>
+                <button class="reg" onclick="openBgmi()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media">
+                <img src="events/ff.jpg" alt="Free Fire" />
+              </div>
+              <div class="body">
+                <h3>Free Fire Squad</h3>
+                <p>Fast-paced battle royale action for Squad</p>
+                <button class="reg" onclick="openFF()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media">
+                <img src="events/valorant.jpg" alt="Valorant" />
+              </div>
+              <div class="body">
+                <h3>Valorant</h3>
+                <p>Tactical shooter competition with team-based gameplay.</p>
+                <button class="reg" onclick="openValo()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media">
+                <img src="events/carrom.png" alt="Carrom" />
+              </div>
+              <div class="body">
+                <h3>Carrom Duo</h3>
+                <p>
+                  Classic board game competition testing precision and strategy.
+                </p>
+                <button class="reg" onclick="openCarrom()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media">
+                <img src="events/anime screening.png" alt="Anime" />
+              </div>
+              <div class="body">
+                <h3>Anime Screening</h3>
+                <p>Community screening of popular anime films and episodes.</p>
+                <button class="reg" onclick="openAnime()">Register</button>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="media">
+                <img src="events/photography.png" alt="Photography" />
+              </div>
+              <div class="body">
+                <h3>Photography</h3>
+                <p>
+                  Capture moments and present a visual story on the given theme.
+                </p>
+                <button class="reg" onclick="openPhoto()">Register</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPGRADE CTA -->
+    <section class="upgrade">
+      <div class="container">
+        <div class="panel-box">
+          <h2>UPGRADEATHON</h2>
+          <p>"Reimagine. Redesign. Reinvent."</p>
+          <div class="cta">
+            <button class="btn" onclick="openLink('#')">Register Now</button>
+            <button class="btn ghost" onclick="openLink('#')">Hackathon Brochure</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery">
+      <div class="container">
+        <div class="section-title">Event Gallery</div>
+        <div
+          class="underline"
+          style="background: linear-gradient(90deg, #ff6b6b, #57a8ff)"
+        ></div>
+
+        <div class="carousel" id="carousel">
+          <div class="slide active" data-i="0">
+            <img src="gallery/1.jpg" alt="Creative Design Competition" />
+            <div class="caption">Creative Design Competition</div>
+          </div>
+          <div class="slide" data-i="1">
+            <img src="gallery/2.jpg" alt="Gaming Arena" />
+            <div class="caption">Gaming Arena</div>
+          </div>
+          <div class="slide" data-i="2">
+            <img src="gallery/3.jpg" alt="Coding Sprint" />
+            <div class="caption">Coding Sprint</div>
+          </div>
+          <div class="slide" data-i="2">
+            <img src="gallery/4.jpg" alt="Free Fire" />
+            <div class="caption">Free Fire</div>
+          </div>
+          <div class="slide" data-i="2">
+            <img src="gallery/5.jpg" alt="Waiting Room" />
+            <div class="caption">Waiting Room</div>
+          </div>
+          <div class="slide" data-i="2">
+            <img src="gallery/6.jpg" alt="Teacher Events" />
+            <div class="caption">Teacher Events</div>
+          </div>
+          <div class="slide" data-i="2">
+            <img src="gallery/7.jpg" alt="BGMI" />
+            <div class="caption">BGMI</div>
+          </div>
+          <div class="slide" data-i="2">
+            <img src="gallery/8.jpg" alt="Valorant" />
+            <div class="caption">Valorant</div>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              justify-content: flex-end;
+              gap: 8px;
+              margin-top: 8px;
+            "
+          >
+            <button
+              id="prev"
+              aria-label="Previous"
+              style="
+                background: rgba(255, 255, 255, 0.06);
+                border: none;
+                padding: 8px 12px;
+                border-radius: 8px;
+                color: #fff;
+              "
+            >
+              ‹
+            </button>
+            <button
+              id="next"
+              aria-label="Next"
+              style="
+                background: rgba(255, 255, 255, 0.06);
+                border: none;
+                padding: 8px 12px;
+                border-radius: 8px;
+                color: #fff;
+              "
+            >
+              ›
+            </button>
+          </div>
+
+          <div class="thumbs" id="thumbs" aria-hidden="false">
+            <button data-i="0" class="active">
+              <img src="gallery/1.jpg" alt="" />
+            </button>
+            <button data-i="1"><img src="gallery/2.jpg" alt="" /></button>
+            <button data-i="2"><img src="gallery/3.jpg" alt="" /></button>
+            <button data-i="3"><img src="gallery/4.jpg" alt="" /></button>
+            <button data-i="4"><img src="gallery/5.jpg" alt="" /></button>
+            <button data-i="5"><img src="gallery/6.jpg" alt="" /></button>
+            <button data-i="6"><img src="gallery/7.jpg" alt="" /></button>
+            <button data-i="7"><img src="gallery/8.jpg" alt="" /></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <h4>About Curiosity</h4>
+          <p>
+            Welcome to Curiosity, where wonder meets innovation! Join us to
+            unleash your curiosity and explore the latest technological
+            advancements that are shaping our world.
+          </p>
+          <div
+            style="
+              font-family: Cinzel;
+              color: var(--red-600);
+              font-weight: 700;
+              margin-top: 6px;
+            "
+          >
+            Curiosity
+          </div>
+        </div>
+
+        <div>
+          <h4>Event Details</h4>
+          <p><i class="fa fa-calendar"></i> 19 - 20 December 2025</p>
+          <p>
+            <i
+              class="fa fa-map-marker"
+            ></i
+            ><a
+              href="https://maps.app.goo.gl/gi4N1xDpWWwcEaBu6"
+              target="_blank"
+              rel="noopener"
+              > Vivek College of Commerce</a
+            >
+          </p>
+          <p><i class="fa fa-phone"></i> Overall Head : 8879950432</p>
+        </div>
+
+        <div>
+          <h4>Connect With Us</h4>
+          <p>
+            <i
+              class="fa fa-instagram"
+              style="margin-right: 8px; color: #ff9b86"
+            ></i
+            ><a
+              href="https://www.instagram.com/curiosity_vivekcollege/"
+              target="_blank"
+              rel="noopener"
+              >@curiosity_vivekcollege</a
+            >
+          </p>
+          <p>
+            <i class="fa fa-file" style="margin-right: 8px; color: #ff9b86"></i
+            ><a href="" target="_blank" rel="noopener">Download Brochure</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="footer-bottom">
+        <div>© 2024 Curiosity — TechGensis. All rights reserved.</div>
+        <div>
+          Website Builder —
+          <a href="https://github.com/AhamedMuhsin" target="_blank" rel="noopener">Ahamed Muhsin</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // carousel
+      (function () {
+        const slides = Array.from(document.querySelectorAll(".slide"));
+        const thumbs = Array.from(document.querySelectorAll("#thumbs button"));
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+        let idx = 0;
+
+        function show(i) {
+          if (!slides.length) return;
+          if (i < 0) i = slides.length - 1;
+          if (i >= slides.length) i = 0;
+          slides.forEach((s, j) => s.classList.toggle("active", j === i));
+          thumbs.forEach((t, j) => t.classList.toggle("active", j === i));
+          idx = i;
+        }
+
+        prev && prev.addEventListener("click", () => show(idx - 1));
+        next && next.addEventListener("click", () => show(idx + 1));
+        thumbs.forEach((b) =>
+          b.addEventListener("click", () => show(Number(b.dataset.i)))
+        );
+
+        let timer = setInterval(() => show(idx + 1), 5000);
+        const carousel = document.getElementById("carousel");
+        if (carousel) {
+          carousel.addEventListener("mouseenter", () => clearInterval(timer));
+          carousel.addEventListener(
+            "mouseleave",
+            () => (timer = setInterval(() => show(idx + 1), 5000))
+          );
+        }
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") show(idx - 1);
+          if (e.key === "ArrowRight") show(idx + 1);
+        });
+      })();
+
+      function openLink(url) {
+        if (!url || url === "#" || url === "") {
+          alert("Replace placeholder link with a real URL");
+          return;
+        }
+        window.open(url, "_blank", "noopener");
+      }
+      function openSite() {
+        window.open(
+          "https://forms.gle/9NiLXpAdEBdsZLzW9",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openDebug() {
+        window.open(
+          "https://forms.gle/FGfXeSjRDtvJMMnE8",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openData() {
+        window.open(
+          "https://forms.gle/dwYev4cLFiRaVgba7",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openThumb(){
+        window.open(
+          "https://forms.gle/CWaYnaeKQNfVrMDJ9",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openClash(){
+        window.open(
+          "https://forms.gle/1uzH1KCfgZBcJNhH8",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openBgmi(){
+        window.open(
+          "https://forms.gle/H9MJPCRgVpTa8cm1A",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openFF(){
+        window.open(
+          "https://forms.gle/FPEzBLGt9RsQyS1a9",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openCodm(){
+        window.open(
+          "https://forms.gle/CVWx12PC1A5iz9in6",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openAnime(){
+        window.open(
+          "https://forms.gle/6mCup2T4fmYpysXo8",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openValo(){
+        window.open(
+          "https://forms.gle/aCUrowZbK94VpRDP8",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openPhoto(){
+        window.open(
+          "https://forms.gle/AEjSZqsiSeSqctKy9",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openCarrom(){
+        window.open(
+          "https://forms.gle/A69HhUAP5X57HRZB6",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openMap(){
+        window.open(
+          "https://maps.app.goo.gl/13hKbR7AowKg5z7q7",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openBrochure(){
+        window.open(
+          "",
+          "_blank",
+          "noopener"
+        );
+      }
+      function openDate(){
+        alert("Event Date: 19 - 20 December 2025");
+        window.open(
+          "",
+          "_blank",
+          "noopener"
+        );
+      }
+    </script>
+  </body>
+</html>
