@@ -1,7 +1,7 @@
 Curiosity — TechGensis Website
 
 Welcome to Curiosity, where wonder meets innovation!
-This is the official website for Curiosity — TechGensis, a two-day technical and non-technical event designed to unleash creativity, inspire innovation, and explore the latest technological advancements shaping our world.
+This is the official website for Curiosity — TechGensis, Technical and Non-Technical event designed to unleash creativity, inspire innovation, and explore the latest technological advancements shaping our world.
 
 🌟 About Curiosity
 

@@ -114,7 +114,7 @@
       .hero {
         position: relative;
         overflow: visible;
-        padding: 72px 0 92px; 
+        padding: 72px 0 92px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -135,7 +135,7 @@
         right: 0;
         bottom: 0;
         z-index: 0;
-        background-image: url("events/background.jpg"); 
+        background-image: url("events/background.jpg");
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -323,13 +323,13 @@
 
       /* upgrade CTA */
       .upgrade .panel-box {
-        max-width: 860px; 
-        margin: 0 auto; 
+        max-width: 860px;
+        margin: 0 auto;
         padding: 36px 22px;
-        text-align: center; 
+        text-align: center;
         display: flex;
         flex-direction: column;
-        align-items: center; 
+        align-items: center;
         justify-content: center;
         gap: 12px;
       }
@@ -516,12 +516,7 @@
         Curiosity
       </div>
       <nav class="navlinks" role="navigation">
-        <a
-          href=""
-          target="_blank"
-          rel="noopener"
-          >Brochure</a
-        >
+        <a href="" target="_blank" rel="noopener">Brochure</a>
         <a
           href="https://www.instagram.com/curiosity_vivekcollege/"
           target="_blank"
@@ -538,9 +533,7 @@
         <h1>CURIOSITY</h1>
         <div class="subtitle">TechGensis</div>
         <div class="cta">
-          <button class="btn" onclick="openDate('')">
-            Date Reveal
-          </button>
+          <button class="btn" onclick="openDate('')">Date Reveal</button>
           <button class="btn ghost" onclick="openBrochure('')">Brochure</button>
         </div>
         <!-- <div class="arrow">↓</div> -->
@@ -728,8 +721,10 @@
           <h2>UPGRADEATHON</h2>
           <p>"Reimagine. Redesign. Reinvent."</p>
           <div class="cta">
-            <button class="btn" onclick="openLink('#')">Register Now</button>
-            <button class="btn ghost" onclick="openLink('#')">Hackathon Brochure</button>
+            <button class="btn" onclick="openUpgrade()">Register Now</button>
+            <button class="btn ghost" onclick="openHack()">
+              Hackathon Brochure
+            </button>
           </div>
         </div>
       </div>
@@ -856,14 +851,13 @@
           <h4>Event Details</h4>
           <p><i class="fa fa-calendar"></i> 19 - 20 December 2025</p>
           <p>
-            <i
-              class="fa fa-map-marker"
-            ></i
+            <i class="fa fa-map-marker"></i
             ><a
               href="https://maps.app.goo.gl/gi4N1xDpWWwcEaBu6"
               target="_blank"
               rel="noopener"
-              > Vivek College of Commerce</a
+            >
+              Vivek College of Commerce</a
             >
           </p>
           <p><i class="fa fa-phone"></i> Overall Head : 8879950432</p>
@@ -896,7 +890,12 @@
         <div>© 2024 Curiosity — TechGensis. All rights reserved.</div>
         <div>
           Website Builder —
-          <a href="https://github.com/AhamedMuhsin" target="_blank" rel="noopener">Ahamed Muhsin</a>
+          <a
+            href="https://github.com/AhamedMuhsin"
+            target="_blank"
+            rel="noopener"
+            >Ahamed Muhsin</a
+          >
         </div>
       </div>
     </footer>
@@ -969,90 +968,88 @@
           "noopener"
         );
       }
-      function openThumb(){
+      function openThumb() {
         window.open(
           "https://forms.gle/CWaYnaeKQNfVrMDJ9",
           "_blank",
           "noopener"
         );
       }
-      function openClash(){
+      function openClash() {
         window.open(
           "https://forms.gle/1uzH1KCfgZBcJNhH8",
           "_blank",
           "noopener"
         );
       }
-      function openBgmi(){
+      function openBgmi() {
         window.open(
           "https://forms.gle/H9MJPCRgVpTa8cm1A",
           "_blank",
           "noopener"
         );
       }
-      function openFF(){
+      function openFF() {
         window.open(
           "https://forms.gle/FPEzBLGt9RsQyS1a9",
           "_blank",
           "noopener"
         );
       }
-      function openCodm(){
+      function openCodm() {
         window.open(
           "https://forms.gle/CVWx12PC1A5iz9in6",
           "_blank",
           "noopener"
         );
       }
-      function openAnime(){
+      function openAnime() {
         window.open(
           "https://forms.gle/6mCup2T4fmYpysXo8",
           "_blank",
           "noopener"
         );
       }
-      function openValo(){
+      function openValo() {
         window.open(
           "https://forms.gle/aCUrowZbK94VpRDP8",
           "_blank",
           "noopener"
         );
       }
-      function openPhoto(){
+      function openPhoto() {
         window.open(
           "https://forms.gle/AEjSZqsiSeSqctKy9",
           "_blank",
           "noopener"
         );
       }
-      function openCarrom(){
+      function openCarrom() {
         window.open(
           "https://forms.gle/A69HhUAP5X57HRZB6",
           "_blank",
           "noopener"
         );
       }
-      function openMap(){
+      function openMap() {
         window.open(
           "https://maps.app.goo.gl/13hKbR7AowKg5z7q7",
           "_blank",
           "noopener"
         );
       }
-      function openBrochure(){
-        window.open(
-          "",
-          "_blank",
-          "noopener"
-        );
+      function openBrochure() {
+        window.open("", "_blank", "noopener");
       }
-      function openDate(){
+      function openDate() {
         alert("Event Date: 19 - 20 December 2025");
-        window.open(
-          "",
-          "_blank",
-          "noopener"
-        );
+        window.open("", "_blank", "noopener");
+      }
+      function openUpgrade() {
+        window.open("", "_blank", "noopener");
+      }
+      function openHack() {
+        window.open("", "_blank", "noopener");
       }
     </script>
   </body>
